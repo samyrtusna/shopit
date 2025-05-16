@@ -4,7 +4,6 @@ const { protect, admin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Get all users (Admin only) GET /api/admin/users
 router.get("/", protect, admin, async (req, res) => {
   try {
     const users = await User.find({});
@@ -15,7 +14,6 @@ router.get("/", protect, admin, async (req, res) => {
   }
 });
 
-// Add a new user (admin only) POST api/admin/users
 router.post("/", protect, admin, async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -38,7 +36,6 @@ router.post("/", protect, admin, async (req, res) => {
   }
 });
 
-// Update user information PUT /api/admin/users/:id
 router.put("/:id", protect, admin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -55,7 +52,6 @@ router.put("/:id", protect, admin, async (req, res) => {
   }
 });
 
-// Delete a user   DELETE /api/admin/users/:id
 router.delete("/:id", protect, admin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

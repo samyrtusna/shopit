@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import CartContents from "../Cart/CartContents";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
+  const drawerRef = useRef(null);
   const navigate = useNavigate();
   const { user, guestId } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
@@ -18,19 +19,35 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
       navigate("/checkout");
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        drawerOpen &&
+        drawerRef.current &&
+        !drawerRef.current.contains(event.target)
+      ) {
+        toggleCartDrawer();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [drawerOpen, toggleCartDrawer]);
+
   return (
     <div
+      ref={drawerRef}
       className={`fixed top-0 right-0 w-3/4 sm:w-1/2 md:w-[25rem] h-full bg-white shadow-lg transform transition-transform duration-300 flex flex-col z-50 ${
         drawerOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      {/* close button */}
       <div className="flex justify-end p-4">
         <button onClick={toggleCartDrawer}>
           <IoMdClose className="h-6 w-6 text-gray-600" />
         </button>
       </div>
-      {/* Cart content with scrollable area */}
       <div className="flex-grow p-4 overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
         {cart && cart?.products?.length > 0 ? (
@@ -43,7 +60,6 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
           <p>You cart is empty.</p>
         )}
       </div>
-      {/* Checkout button fixed at the bottom */}
       <div className="p-4 bg-white sticky bottom-0">
         {cart && cart?.products?.length > 0 && (
           <>

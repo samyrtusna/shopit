@@ -54,7 +54,6 @@ const NewArrivals = () => {
     });
   };
 
-  //update scroll buttons
   const updateScrollButtons = () => {
     const container = scrollRef.current;
 
@@ -66,12 +65,6 @@ const NewArrivals = () => {
       setCanScrollLeft(leftScroll > 0);
       setCanScrollRight(rightScrollable);
     }
-    // console.log({
-    //   scrollLeft: container.scrollLeft,
-    //   scrollWidth: container.scrollWidth,
-    //   clientWidth: container.clientWidth,
-    //   offsetLeft: container.offsetLeft,
-    // });
   };
 
   useEffect(() => {
@@ -90,7 +83,6 @@ const NewArrivals = () => {
           Discover the latest style straight off the runway, freeshly added to
           keep your wardrobe on the cutting edge of fashion.
         </p>
-        {/* Scrool Buttons */}
         <div className="absolute right-0 bottom-[-30px] flex space-x-2">
           <button
             onClick={() => scroll("left")}
@@ -115,7 +107,6 @@ const NewArrivals = () => {
           </button>
         </div>
       </div>
-      {/* Scrollable Content */}
       <div
         ref={scrollRef}
         onMouseDown={handleMouseDown}

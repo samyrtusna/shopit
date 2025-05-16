@@ -4,7 +4,6 @@ const { protect, admin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Get all orsers(admin only)  GET /api/admin/orders
 router.get("/", protect, admin, async (req, res) => {
   try {
     const orders = await Order.find({}).populate("user", "name email");
@@ -15,7 +14,6 @@ router.get("/", protect, admin, async (req, res) => {
   }
 });
 
-// Update order status  PUT /api/admin/orders/:id
 router.put("/:id", protect, admin, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id).populate("user", "name");
@@ -37,7 +35,6 @@ router.put("/:id", protect, admin, async (req, res) => {
   }
 });
 
-// Delete an order DELETE /api/admin/orders/:id
 router.delete("/:id", protect, admin, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);

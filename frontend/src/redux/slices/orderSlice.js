@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Async Thunk to fetch user orders
 export const fetchUserOrders = createAsyncThunk(
   "orders/fetchUserOrders",
   async (_, { rejectWithValue }) => {
@@ -21,7 +20,6 @@ export const fetchUserOrders = createAsyncThunk(
   }
 );
 
-// Async Thunk to fetch order details by ID
 export const fetchOrderDetails = createAsyncThunk(
   "orders/fetchOrderDetails",
   async (orderId, { rejectWithValue }) => {
@@ -65,7 +63,6 @@ const orderSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
-      // Fetch order details
       .addCase(fetchOrderDetails.pending, (state) => {
         state.loading = true;
         state.error = null;

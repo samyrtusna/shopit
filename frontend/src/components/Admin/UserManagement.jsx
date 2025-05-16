@@ -67,7 +67,6 @@ const UserManagement = () => {
       <h2 className="text-2xl font-bold mb-6">User Management</h2>
       {loading && <p>Loading ...</p>}
       {error && <p>Error: {error}</p>}
-      {/* Add New User Form */}
       <div className="p-6 rounded-lg mb-6">
         <h3 className="text-lg font-bold mb-4">Add New User</h3>
         <form onSubmit={handleSubmit}>
@@ -144,7 +143,6 @@ const UserManagement = () => {
           </button>
         </form>
       </div>
-      {/* User List Management */}
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="min-w-full text-left text-gray-500">
           <thead className="bg-gray-100 text-xs uppercase text-gray-700">

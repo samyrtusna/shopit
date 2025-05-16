@@ -30,7 +30,7 @@ const EditProductPage = () => {
     images: [],
   });
 
-  const [uploading, setUploading] = useState(false); // Image uploading state
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -88,7 +88,6 @@ const EditProductPage = () => {
     <div className="max-w-5xl mx-auto p-6 shadow-md rounded-md">
       <h2 className="text-3xl font-bold mb-6">Edit Product</h2>
       <form onSubmit={handleSubmit}>
-        {/* Name */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">Product Name</label>
           <input
@@ -100,7 +99,6 @@ const EditProductPage = () => {
             required
           />
         </div>
-        {/* Description */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">Description</label>
           <textarea
@@ -111,7 +109,6 @@ const EditProductPage = () => {
             required
           />
         </div>
-        {/* Price */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">Price</label>
           <input
@@ -122,7 +119,6 @@ const EditProductPage = () => {
             className="w-full border border-gray-300 rounded-md p-2"
           />
         </div>
-        {/* Count In Stock */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">Count In Stock</label>
           <input
@@ -133,7 +129,6 @@ const EditProductPage = () => {
             className="w-full border border-gray-300 rounded-md p-2"
           />
         </div>
-        {/* SKU */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">SKU</label>
           <input
@@ -144,7 +139,6 @@ const EditProductPage = () => {
             className="w-full border border-gray-300 rounded-md p-2"
           />
         </div>
-        {/* Sizes */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">
             Sizes(comma-separated)
@@ -162,7 +156,6 @@ const EditProductPage = () => {
             className="w-full border border-gray-300 rounded-md p-2"
           />
         </div>
-        {/* Colors */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">
             Colors(comma-separated)
@@ -180,7 +173,6 @@ const EditProductPage = () => {
             className="w-full border border-gray-300 rounded-md p-2"
           />
         </div>
-        {/* Image Upload */}
         <div className="mb-6">
           <label className="block font-semibold mb-2">Upload Image</label>
           <input

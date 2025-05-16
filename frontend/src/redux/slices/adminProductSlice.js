@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// async thunk to fetch admin products
 export const fetchAdminProducts = createAsyncThunk(
   "adminProducts/fetchProducts",
   async (_, { rejectWithValue }) => {
@@ -21,7 +20,6 @@ export const fetchAdminProducts = createAsyncThunk(
   }
 );
 
-// async function to create a new product
 export const createProduct = createAsyncThunk(
   "adminProducts/createProduct",
   async (productData, { rejectWithValue }) => {
@@ -42,7 +40,6 @@ export const createProduct = createAsyncThunk(
   }
 );
 
-// async thunk to update an existing product
 export const updateProduct = createAsyncThunk(
   "adminProducts/updateProduct",
   async ({ id, productData }, { rejectWithValue }) => {
@@ -63,7 +60,6 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
-// async thunk to delete a product
 export const deleteProduct = createAsyncThunk(
   "adminProducts/deleteProduct",
   async (id, { rejectWithValue }) => {
@@ -93,7 +89,6 @@ const adminProductSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Fetch products
       .addCase(fetchAdminProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -106,7 +101,6 @@ const adminProductSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
-      // Create product
       .addCase(createProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -119,7 +113,6 @@ const adminProductSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
-      // Update product
       .addCase(updateProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -137,7 +130,6 @@ const adminProductSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
-      // Delete product
       .addCase(deleteProduct.pending, (state) => {
         state.loading = true;
         state.error = null;

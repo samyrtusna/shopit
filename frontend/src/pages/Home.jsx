@@ -16,7 +16,6 @@ const Home = () => {
   const [bestSellersProducts, setBestSellersProducts] = useState(null);
 
   useEffect(() => {
-    // Fetch products for a specific collection
     dispatch(
       fetchProductsByFilters({
         gender: "Women",
@@ -24,7 +23,6 @@ const Home = () => {
         limit: 8,
       })
     );
-    // Fetch best seller product
     const fetchBestSellers = async () => {
       try {
         const response = await axios.get(
@@ -43,8 +41,7 @@ const Home = () => {
       <Hero />
       <GenderCollectionSection />
       <NewArrivals />
-      {/* Best Seller */}
-      <h2 className="text-3xl text-center font-bold mb-4">Best Seller</h2>
+      <h2 className="text-3xl text-center font-bold mt-16 mb-2">Best Seller</h2>
       {bestSellersProducts ? (
         <ProductDetails productId={bestSellersProducts._id} />
       ) : (

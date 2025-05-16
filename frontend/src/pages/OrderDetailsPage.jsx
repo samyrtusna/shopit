@@ -22,7 +22,6 @@ const OrderDetailsPage = () => {
         <p>No Order details found</p>
       ) : (
         <div className="p-4 sm:p-6 rounded-lg border">
-          {/* Order Info */}
           <div className="flex flex-col sm:flex-row justify-between mb-8">
             <div>
               <h3 className="text-lg md:text-xl font-semibold">
@@ -53,7 +52,6 @@ const OrderDetailsPage = () => {
               </span>
             </div>
           </div>
-          {/* Customer, Payment, Shipping Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
             <div>
               <h4 className="text-lg font-semibold mb-2">Payment Info</h4>
@@ -69,7 +67,6 @@ const OrderDetailsPage = () => {
               </p>
             </div>
           </div>
-          {/* Product list */}
           <div className="overflow-x-auto">
             <h4 className="text-lg font-semibold mb-4">Products</h4>
             <table className="min-w-full text-gray-600 mb-4">
@@ -108,7 +105,6 @@ const OrderDetailsPage = () => {
               </tbody>
             </table>
           </div>
-          {/* Back to Oorders Link */}
           <Link
             to="/my-orders"
             className="text-blue-500 hover:underline"

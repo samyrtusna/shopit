@@ -5,12 +5,10 @@ const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Register route POST api/users/register
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Registration logic
     let user = await User.findOne({ email });
 
     if (user) {
@@ -19,7 +17,6 @@ router.post("/register", async (req, res) => {
     user = new User({ name, email, password });
     await user.save();
 
-    //Create JWT payload
     const payload = {
       user: {
         id: user.id,
@@ -27,7 +24,6 @@ router.post("/register", async (req, res) => {
       },
     };
 
-    // Sign and return the JWT token
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
@@ -51,12 +47,10 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login route POST /api/users/login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
     let user = await User.findOne({ email });
 
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
@@ -72,7 +66,6 @@ router.post("/login", async (req, res) => {
       },
     };
 
-    // Sign and return the JWT token
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
@@ -96,7 +89,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// User profile Route GET api/users/profile
 router.get("/profile", protect, async (req, res) => {
   res.json(req.user);
 });

@@ -21,14 +21,12 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
-// Connect to MongoDB
 connectDB();
 
 app.get("/api", (req, res) => {
   res.send("WELCOME TO RABBIT API!");
 });
 
-// API routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
@@ -37,7 +35,6 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", subscriberRoutes);
 
-// Admin
 app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);

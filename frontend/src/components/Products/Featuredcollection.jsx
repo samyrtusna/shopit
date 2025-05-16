@@ -6,7 +6,6 @@ const Featuredcollection = () => {
   return (
     <section className="py-16 px-4 lg:px-0">
       <div className="container mx-auto flex flex-col-reverse lg:flex-row itemx-center bg-green-50 rounded-3xl">
-        {/* Left Content */}
         <div className="lg:w-1/2 p-8 text-center lg:text-left">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">
             Confort and Style
@@ -26,7 +25,6 @@ const Featuredcollection = () => {
             Shop Now
           </Link>
         </div>
-        {/* Right Content */}
         <div className="lg:w-1/2">
           <img
             src={featured}

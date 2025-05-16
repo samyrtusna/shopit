@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Fetch all orders(admin only)
 export const fetchAllOrders = createAsyncThunk(
   "adminOrders/fetchAllOrders",
   async (_, { rejectWithValue }) => {
@@ -21,7 +20,6 @@ export const fetchAllOrders = createAsyncThunk(
   }
 );
 
-// Update order status
 export const updateOrderStatus = createAsyncThunk(
   "adminOrders/updateOrderStatus",
   async ({ id, status }, { rejectWithValue }) => {
@@ -42,7 +40,6 @@ export const updateOrderStatus = createAsyncThunk(
   }
 );
 
-// Delete order
 export const deleteOrder = createAsyncThunk(
   "adminOrders/deleteOrder",
   async (id, { rejectWithValue }) => {
@@ -91,7 +88,6 @@ const adminOrderSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Update order status
       .addCase(updateOrderStatus.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -109,7 +105,6 @@ const adminOrderSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
-      // Delete order
       .addCase(deleteOrder.pending, (state) => {
         state.loading = true;
         state.error = null;

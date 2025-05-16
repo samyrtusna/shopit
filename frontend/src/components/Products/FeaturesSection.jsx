@@ -9,7 +9,6 @@ const FeaturesSection = () => {
   return (
     <section className="py-16 px-4 bg-white">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        {/* Feature 1 */}
         <div className="flex flex-col items-center">
           <div className="p-4 rounded-full mb-4">
             <HiShoppingBag className="text-xl" />
@@ -20,7 +19,6 @@ const FeaturesSection = () => {
           </p>
         </div>
 
-        {/* Feature 2 */}
         <div className="flex flex-col items-center">
           <div className="p-4 rounded-full mb-4">
             <HiArrowPathRoundedSquare className="text-xl" />
@@ -31,7 +29,6 @@ const FeaturesSection = () => {
           </p>
         </div>
 
-        {/* Feature 3 */}
         <div className="flex flex-col items-center">
           <div className="p-4 rounded-full mb-4">
             <HiOutlineCreditCard className="text-xl" />

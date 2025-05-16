@@ -3,7 +3,6 @@ const Subscriber = require("../models/Subscriber");
 
 const router = express.Router();
 
-// Handle newsletter subscription POST :api/subscribe
 router.post("/subscribe", async (req, res) => {
   const { email } = req.body;
 
@@ -12,14 +11,12 @@ router.post("/subscribe", async (req, res) => {
   }
 
   try {
-    // Check if the email is already subscribed
     let subscriber = await Subscriber.findOne({ email });
 
     if (subscriber) {
       return res.status(400).json({ message: "email is already subscribed" });
     }
 
-    // Create a new subscriber
     subscriber = new Subscriber({ email });
     await subscriber.save();
     res

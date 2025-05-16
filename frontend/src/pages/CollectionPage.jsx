@@ -25,16 +25,13 @@ const CollectionPage = () => {
   };
 
   const handleClickOutside = (e) => {
-    //Close sidebar if clicked outside
     if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
       setIsSidebarOpen(false);
     }
   };
 
   useEffect(() => {
-    // Add Eventlistner for clocks
     document.addEventListener("mousedown", handleClickOutside);
-    // clean event listner
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -42,7 +39,6 @@ const CollectionPage = () => {
 
   return (
     <div className="flex flex-col lg:flex-row">
-      {/* Mobile Filter button */}
       <button
         onClick={toggleSidebar}
         className="lg:hidden border p-2 flex justify-center items-center"
@@ -51,7 +47,6 @@ const CollectionPage = () => {
         Filters
       </button>
 
-      {/* Filter Sidebar */}
       <div
         ref={sidebarRef}
         className={`${
@@ -62,10 +57,8 @@ const CollectionPage = () => {
       </div>
       <div className="flex-grow p-4">
         <h2 className="text-2xl uppercase mb-4">All Collection</h2>
-        {/* SortOptions */}
         <SortOption />
 
-        {/* Product Grid */}
         <ProductGrid
           products={products}
           loading={loading}

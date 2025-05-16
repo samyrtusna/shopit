@@ -4,54 +4,11 @@ const { protect, admin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Create a new product POST api/products
-// access Private/Admin
-
 router.post("/", protect, admin, async (req, res) => {
   try {
-    const {
-      name,
-      description,
-      price,
-      discountPrice,
-      countInStock,
-      category,
-      brand,
-      sizes,
-      colors,
-      collections,
-      material,
-      gender,
-      images,
-      isFeatured,
-      isPublished,
-      tags,
-      dimensions,
-      weight,
-      sku,
-    } = req.body;
-
     const product = new Product({
-      name,
-      description,
-      price,
-      discountPrice,
-      countInStock,
-      category,
-      brand,
-      sizes,
-      colors,
-      collections,
-      material,
-      gender,
-      images,
-      isFeatured,
-      isPublished,
-      tags,
-      dimensions,
-      weight,
-      sku,
-      user: req.user._id, // Reference to the admin user who created it
+      ...req.body,
+      user: req.user._id,
     });
 
     const createdProduct = await product.save();
@@ -61,8 +18,6 @@ router.post("/", protect, admin, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-// Update an existing product by id PUT /api/products/:id
 
 router.put("/:id", protect, admin, async (req, res) => {
   try {
@@ -88,11 +43,9 @@ router.put("/:id", protect, admin, async (req, res) => {
       sku,
     } = req.body;
 
-    // Find product by ID
     const product = await Product.findById(req.params.id);
 
     if (product) {
-      // Update product fields
       product.name = name || product.name;
       product.description = description || product.description;
       product.price = price || product.price;
@@ -115,7 +68,6 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.weight = weight || product.weight;
       product.sku = sku || product.sku;
 
-      // Save the updated product
       const updatedProduct = await product.save();
       res.json(updatedProduct);
     } else {
@@ -127,15 +79,11 @@ router.put("/:id", protect, admin, async (req, res) => {
   }
 });
 
-// Delete a product by Id DELETE /api/products/:id
-
 router.delete("/:id", protect, admin, async (req, res) => {
   try {
-    //Find the product by ID
     const product = await Product.findById(req.params.id);
 
     if (product) {
-      // Remove the product from DB
       await product.deleteOne();
       res.json({ message: "Product removed" });
     } else {
@@ -147,7 +95,6 @@ router.delete("/:id", protect, admin, async (req, res) => {
   }
 });
 
-// Get all products with optional query filters GET/api/products access: public
 router.get("/", async (req, res) => {
   try {
     const {
@@ -167,7 +114,6 @@ router.get("/", async (req, res) => {
 
     let query = {};
 
-    // Filter logic
     if (collection && collection.toLocaleLowerCase() !== "all") {
       query.collections = collection;
     }
@@ -209,7 +155,6 @@ router.get("/", async (req, res) => {
       ];
     }
 
-    // Sort Logic
     let sort = {};
     if (sortBy) {
       switch (sortBy) {
@@ -227,7 +172,6 @@ router.get("/", async (req, res) => {
       }
     }
 
-    // Fetch products and apply sorting and limit
     let products = await Product.find(query)
       .sort(sort)
       .limit(Number(limit) || 0);
@@ -238,8 +182,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Retrieve the product with highest rating GET api/products/best-seller
-// to avoid bugs, static queries should be implemented before dynamic queries.
 router.get("/best-seller", async (req, res) => {
   try {
     const bestSeller = await Product.findOne().sort({ rating: -1 });
@@ -254,10 +196,8 @@ router.get("/best-seller", async (req, res) => {
   }
 });
 
-// Retrieve latest 8 products - Creation date  GET api/products/new-arrivals
 router.get("/new-arrivals", async (req, res) => {
   try {
-    // Fetch latest 8 products
     const newArrivals = await Product.find().sort({ createdAt: -1 }).limit(8);
     res.json(newArrivals);
   } catch (error) {
@@ -266,7 +206,6 @@ router.get("/new-arrivals", async (req, res) => {
   }
 });
 
-// Get a single product by ID GET api/products/:id
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -281,8 +220,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Retieve similar products based on the current product's gender and category
-// Get api/products/similar/:id
 router.get("/similar/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -294,7 +231,7 @@ router.get("/similar/:id", async (req, res) => {
     }
 
     const similarProducts = await Product.find({
-      _id: { $ne: id }, // Exclude the current product ID
+      _id: { $ne: id },
       gender: product.gender,
       category: product.category,
     }).limit(4);

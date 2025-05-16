@@ -8,7 +8,6 @@ const { default: mongoose } = require("mongoose");
 
 const router = express.Router();
 
-// Create a new checkout session Post /api/checkout
 router.post("/", protect, async (req, res) => {
   const { checkoutItems, shippingAddress, paymentMethod, totalPrice } =
     req.body;
@@ -17,7 +16,6 @@ router.post("/", protect, async (req, res) => {
     return res.status(400).json({ message: "no items in checkout" });
   }
   try {
-    // Create a new checkout session
     const newCheckout = await Checkout.create({
       user: req.user._id,
       checkoutItems: checkoutItems,
@@ -35,7 +33,6 @@ router.post("/", protect, async (req, res) => {
   }
 });
 
-// Update checkout to mark as paid after successful payment PUT :api/checkout/:id/pay
 router.put("/:id/pay", protect, async (req, res) => {
   const { paymentStatus, paymentDetails } = req.body;
 
@@ -64,7 +61,6 @@ router.put("/:id/pay", protect, async (req, res) => {
   }
 });
 
-// Finalize checkout and convert to an order after payment confirmation POST /api/checkout/:id/finalize
 router.post("/:id/finalize", protect, async (req, res) => {
   try {
     const checkout = await Checkout.findById(req.params.id);
@@ -74,7 +70,6 @@ router.post("/:id/finalize", protect, async (req, res) => {
     }
 
     if (checkout.isPaid && !checkout.isFinalized) {
-      // Create final order based on the checkout details
       const finalOrder = await Order.create({
         user: checkout.user,
         orderItems: checkout.checkoutItems,
@@ -87,11 +82,9 @@ router.post("/:id/finalize", protect, async (req, res) => {
         paymentStatus: "Paid",
         paymentDetails: checkout.paymentDetails,
       });
-      // Mark the checkout as finalized
       checkout.isFinalized = true;
       checkout.finalizedAt = Date.now();
       await checkout.save();
-      // Delete the cart associated <ith the user
       await Cart.findOneAndDelete({ user: checkout.user });
       res.status(201).json(finalOrder);
     } else if (checkout.isFinalized) {

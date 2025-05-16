@@ -1,17 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Retrieve user info and token from localStorage id available
 const userFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
-// Check for an existing guest ID in the localStorage or generate a new one
 const initialGuestId =
   localStorage.getItem("guestId") || `guest_${new Date().getTime()}`;
-localStorage.setItem("guestId", initialGuestId); // Store the guest ID in localStorage
+localStorage.setItem("guestId", initialGuestId);
 
-// Initial state
 const initialState = {
   user: userFromStorage,
   guestId: initialGuestId,
@@ -19,7 +16,6 @@ const initialState = {
   error: null,
 };
 
-// Async Thunk for user login
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
@@ -38,7 +34,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// Async Thunk for user Registration
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
@@ -57,21 +52,20 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// Slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.guestId = `guest_${new Date().getTime()}`; // Generate a new guest ID
+      state.guestId = `guest_${new Date().getTime()}`;
       localStorage.removeItem("userInfo");
       localStorage.removeItem("userToken");
-      localStorage.setItem("guestId", state.guestId); // Store the new guest ID in localStorage
+      localStorage.setItem("guestId", state.guestId);
     },
     generateNewGuestId: (state) => {
-      state.guestId = `guest_${new Date().getTime()}`; // Generate a new guest ID
-      localStorage.setItem("guestId", state.guestId); // Store the new guest ID in localStorage
+      state.guestId = `guest_${new Date().getTime()}`;
+      localStorage.setItem("guestId", state.guestId);
     },
   },
   extraReducers: (builder) => {

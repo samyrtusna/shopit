@@ -19,7 +19,7 @@ const OrderConfirmationPage = () => {
 
   const calculateEstimatedDelivery = (createdAt) => {
     const orderDate = new Date(createdAt);
-    orderDate.setDate(orderDate.getDate() + 10); // Add 10 days to the order date
+    orderDate.setDate(orderDate.getDate() + 10);
     return orderDate.toLocaleDateString();
   };
   return (
@@ -30,7 +30,6 @@ const OrderConfirmationPage = () => {
       {checkout && (
         <div className="p-6 rounded-lg border">
           <div className="flex justify-between mb-20">
-            {/* Order Id and Date */}
             <div>
               <h2 className="text-xl font-semibold">
                 Order ID: {checkout._id}
@@ -39,7 +38,6 @@ const OrderConfirmationPage = () => {
                 Order date: {new Date(checkout.createdAt).toLocaleDateString()}
               </p>
             </div>
-            {/* Estimated Delivery */}
             <div>
               <p className="text-emerald-700 text-sm">
                 Estimated Delivery:{" "}
@@ -47,7 +45,6 @@ const OrderConfirmationPage = () => {
               </p>
             </div>
           </div>
-          {/* Order Items */}
           <div className="mb-20">
             {checkout.checkoutItems.map((item) => (
               <div
@@ -72,14 +69,11 @@ const OrderConfirmationPage = () => {
               </div>
             ))}
           </div>
-          {/* Payment and Delivery Info */}
           <div className="grid grid-cols-2 gap-8">
-            {/* Payment Info */}
             <div>
               <h4 className="text-lg font-semibold mb-2">Payment</h4>
               <p className="text-gray-600">PayPal</p>
             </div>
-            {/* Delivery Info */}
             <div>
               <h4 className="text-lg font-semibold mb-2">Delivery</h4>
               <p className="text-gray-600">

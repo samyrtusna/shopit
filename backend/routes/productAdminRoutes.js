@@ -4,8 +4,6 @@ const { protect, admin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Get all products (Admin only) GET /api/admin/products
-
 router.get("/", protect, admin, async (req, res) => {
   try {
     const products = await Product.find({});

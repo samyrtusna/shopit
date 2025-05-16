@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// fetch all users (admin only)
 export const fetchUsers = createAsyncThunk(
   "admin/fetchUsers",
   async (_, { rejectWithValue }) => {
@@ -21,7 +20,6 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-// ADD the create user action
 export const addUser = createAsyncThunk(
   "admin/addUser",
   async (userData, { rejectWithValue }) => {
@@ -42,7 +40,6 @@ export const addUser = createAsyncThunk(
   }
 );
 
-// Update the user information (admin only)
 export const updateUser = createAsyncThunk(
   "admin/updateUser",
   async ({ id, name, email, role }, { rejectWithValue }) => {
@@ -63,7 +60,6 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-// Delete a user (admin only)
 export const deleteUser = createAsyncThunk(
   "admin/deleteUser",
   async (id, { rejectWithValue }) => {
@@ -141,7 +137,7 @@ const adminSlice = createSlice({
       })
       .addCase(addUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.users.push(action.payload.user); // Assuming the API returns the new user in the response
+        state.users.push(action.payload.user);
       })
       .addCase(addUser.rejected, (state, action) => {
         state.loading = false;

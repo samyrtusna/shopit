@@ -86,7 +86,6 @@ const ProductDetails = ({ productId }) => {
       {selectedProduct && (
         <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg ">
           <div className="flex flex-col md:flex-row ">
-            {/* Left Thumbtail */}
             <div className="hidden md:flex flex-col space-y-4 mr-6">
               {selectedProduct.images.map((image, index) => (
                 <img
@@ -100,7 +99,6 @@ const ProductDetails = ({ productId }) => {
                 />
               ))}
             </div>
-            {/* Main Image */}
             <div className="md:w-1/2">
               <div className="mb-4">
                 <img
@@ -110,7 +108,6 @@ const ProductDetails = ({ productId }) => {
                 />
               </div>
             </div>
-            {/* Mobile Thumbnail */}
             <div className="md:hidden flex overscroll-x-scroll space-x-4 mb-4">
               {selectedProduct.images.map((image, index) => (
                 <img
@@ -124,7 +121,6 @@ const ProductDetails = ({ productId }) => {
                 />
               ))}
             </div>
-            {/* Right Side */}
             <div className="md:w-1/2 md:ml-10">
               <h1 className="text-2xl md:text-3xl font-semibold mb-2">
                 {selectedProduct.name}

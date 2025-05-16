@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import {
@@ -9,9 +9,9 @@ import {
 const CartContents = ({ cart, userId, guestId }) => {
   const dispatch = useDispatch();
 
-  // Handle adding to or substracting from the cart
   const handleAddToCart = (productId, delta, quantity, size, color) => {
     const newQuantity = quantity + delta;
+
     if (newQuantity >= 1) {
       dispatch(
         updateCartItemQuantity({
@@ -44,7 +44,7 @@ const CartContents = ({ cart, userId, guestId }) => {
             />
             <div>
               <h3>{product.name}</h3>
-              <p className="text-sm text-gray-50">
+              <p className="text-sm text-gray-500">
                 size : {product.size} | color : {product.color}
               </p>
               <div className="flex items-center mt-2">
@@ -58,7 +58,12 @@ const CartContents = ({ cart, userId, guestId }) => {
                       product.color
                     )
                   }
-                  className="border rounded px-2 py-1 text-xl font-medium"
+                  className={`border rounded px-2 py-1 text-xl font-medium ${
+                    product.quantity === 1
+                      ? "cursor-not-allowed opacity-50"
+                      : "hover:bg-gray-100"
+                  }`}
+                  disabled={product.quantity === 1}
                 >
                   -
                 </button>
@@ -73,7 +78,7 @@ const CartContents = ({ cart, userId, guestId }) => {
                       product.color
                     )
                   }
-                  className="border rounded px-2 py-1 text-xl font-medium"
+                  className="border rounded px-1.5 py-1 text-xl font-medium hover:bg-gray-100"
                 >
                   +
                 </button>

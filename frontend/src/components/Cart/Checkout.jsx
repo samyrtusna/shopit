@@ -19,7 +19,6 @@ const Checkout = () => {
     phone: "",
   });
 
-  // Ensure cart is loaded before proceeding
   useEffect(() => {
     if (!cart || !cart.products || cart.products.length === 0) {
       navigate("/");
@@ -38,7 +37,7 @@ const Checkout = () => {
         })
       );
       if (res.payload && res.payload._id) {
-        setCheckoutId(res.payload._id); // Set checkout ID if checkout was successful
+        setCheckoutId(res.payload._id);
       }
     }
   };
@@ -55,7 +54,7 @@ const Checkout = () => {
         }
       );
 
-      await handleFinalizeCheckout(checkoutId); // Finalize checkout if payment is successful
+      await handleFinalizeCheckout(checkoutId);
     } catch (error) {
       console.error(error);
     }
@@ -88,7 +87,6 @@ const Checkout = () => {
   }
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6 tracking-tighter">
-      {/* Left Section */}
       <div className="bg-white rounded-lg p-6">
         <h2 className="text-2xl uppercase mb-6">Checkout</h2>
         <form onSubmit={handleCreateCheckout}>
@@ -223,7 +221,6 @@ const Checkout = () => {
             ) : (
               <div>
                 <h3 className="text-lg mb-4">Pay with Paypal</h3>
-                {/* Paypal button */}
                 <PaypalButton
                   amount={cart.totalPrice}
                   onSuccess={handlePaymentSuccess}
@@ -234,7 +231,6 @@ const Checkout = () => {
           </div>
         </form>
       </div>
-      {/* Right Section */}
       <div className="bg-gray-50 p-6 rounded-lg">
         <h3 className="text-lg mb-4">Order Summary</h3>
         <div className="border-t py-4 mb-4">

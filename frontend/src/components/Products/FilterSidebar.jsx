@@ -106,7 +106,6 @@ const FilterSidebar = () => {
     <div className="p-4 ">
       <h3 className="text-xl font-medium text-gray-800 mb-4">Filter</h3>
 
-      {/* Category Filter */}
       <div className="mb-6">
         <label className="block text-gray-600 font-medium mb-2">Category</label>
         {categories.map((category) => (
@@ -127,7 +126,6 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* Gender Filter */}
       <div className="mb-6">
         <label className="block text-gray-600 font-medium mb-2">Gender</label>
         {genders.map((gender) => (
@@ -148,7 +146,6 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* Color Filter */}
       <div className="mb-6">
         <label className="block text-gray-600 font-medium mb-2">Color</label>
         <div className="flex flex-wrap gap-2">
@@ -167,7 +164,6 @@ const FilterSidebar = () => {
         </div>
       </div>
 
-      {/* Size Filter */}
       <div className="mb-6 ">
         <label className="block text-gray-600 font-medium mb-2">Size</label>
         {sizes.map((size) => (
@@ -188,7 +184,6 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* Material Filter */}
       <div className="mb-6 ">
         <label className="block text-gray-600 font-medium mb-2">Material</label>
         {materials.map((material) => (
@@ -209,7 +204,6 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* Brand Filter */}
       <div className="mb-6 ">
         <label className="block text-gray-600 font-medium mb-2">Brand</label>
         {brands.map((brand) => (
@@ -230,7 +224,6 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* Price Range Filter */}
       <div className="mb-8">
         <label className="blaock text-gray-600 font-medium mb-2">
           Price Range

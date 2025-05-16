@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Async Thunk for fetching Products by Collection and optional Filters
 export const fetchProductsByFilters = createAsyncThunk(
   "products/fetchProductsByFilters",
   async ({
@@ -39,7 +38,6 @@ export const fetchProductsByFilters = createAsyncThunk(
   }
 );
 
-// Async Thunk for fetching a single Product by ID
 export const fetchProductDetails = createAsyncThunk(
   "products/fetchProductDetails",
   async (id) => {
@@ -50,7 +48,6 @@ export const fetchProductDetails = createAsyncThunk(
   }
 );
 
-//Async thunk to update a  product
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({ id, productData }) => {
@@ -67,7 +64,6 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
-//Async thunk to fetch similar products
 export const fetchSimilarProducts = createAsyncThunk(
   "products/fetchSimilarProducts",
   async (id) => {
@@ -82,7 +78,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
-    selectedProduct: null, // Store the details of the selected product
+    selectedProduct: null,
     loading: false,
     error: null,
     filters: {
@@ -121,7 +117,6 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // handle fetching products with filter
       .addCase(fetchProductsByFilters.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -132,9 +127,8 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductsByFilters.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload;
       })
-      // handle fetching single product details
       .addCase(fetchProductDetails.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -147,7 +141,6 @@ const productsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Handle updating product
       .addCase(updateProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -166,7 +159,6 @@ const productsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Handle fetching similar products
       .addCase(fetchSimilarProducts.pending, (state) => {
         state.loading = true;
         state.error = null;

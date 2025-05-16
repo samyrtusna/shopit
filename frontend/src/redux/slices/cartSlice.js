@@ -1,18 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Helper function to load cart from local storage
 const loadCartFromLocalStorage = () => {
   const storedCart = localStorage.getItem("cart");
   return storedCart ? JSON.parse(storedCart) : { products: [] };
 };
 
-// Helper function to save cart to local storage
 const saveCartToLocalStorage = (cart) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
-// Fetch cart from a user or guest
 export const fetchCart = createAsyncThunk(
   "cart/fetchCart",
   async ({ userId, guestId }, { rejectWithValue }) => {
@@ -34,7 +31,6 @@ export const fetchCart = createAsyncThunk(
   }
 );
 
-// Add an item to the cart for a user or guest
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async (
@@ -61,7 +57,6 @@ export const addToCart = createAsyncThunk(
   }
 );
 
-// Update the quantity of an item in the cart
 export const updateCartItemQuantity = createAsyncThunk(
   "cart/updateCartItemQuantity",
   async (
@@ -88,7 +83,6 @@ export const updateCartItemQuantity = createAsyncThunk(
   }
 );
 
-// Remove an item from the cart
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async ({ productId, userId, guestId, size, color }, { rejectWithValue }) => {
@@ -113,7 +107,6 @@ export const removeFromCart = createAsyncThunk(
   }
 );
 
-// Merge a guest cart into a user cart
 export const mergeCart = createAsyncThunk(
   "cart/mergeCart",
   async ({ guestId, user }, { rejectWithValue }) => {
@@ -123,7 +116,7 @@ export const mergeCart = createAsyncThunk(
         {
           guestId,
           user,
-        }, // Assuming user is an object containing userId and other details
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
