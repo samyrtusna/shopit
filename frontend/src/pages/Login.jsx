@@ -43,7 +43,7 @@ const Login = () => {
           className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm"
         >
           <div className="flex justify-center mb-6">
-            <h2 className="text-xl font-medium">Rabbit</h2>
+            <h2 className="text-xl font-medium">Shopit</h2>
           </div>
           <h2 className="text-2xl font-bold text-center mb-6">
             Hey there! 👏{" "}
@@ -77,7 +77,7 @@ const Login = () => {
           >
             {loading ? "loading..." : "Sign In"}
           </button>
-          <p className="mt-6 text-center textsm">
+          <p className="mt-6 text-center text-sm">
             Don't have an account?{" "}
             <Link
               to={`/register?redirect=${encodeURIComponent(redirect)}`}

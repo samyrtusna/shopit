@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 
 app.get("/api", (req, res) => {
-  res.send("WELCOME TO RABBIT API!");
+  res.send("WELCOME TO SHOPIT API!");
 });
 
 app.use("/api/users", userRoutes);

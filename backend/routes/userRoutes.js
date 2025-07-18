@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+const createToken = require("../services/jwtService");
 const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
@@ -17,30 +17,16 @@ router.post("/register", async (req, res) => {
     user = new User({ name, email, password });
     await user.save();
 
-    const payload = {
+    const token = createToken(user);
+    res.status(201).json({
       user: {
-        id: user.id,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
         role: user.role,
       },
-    };
-
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: "40h" },
-      (err, token) => {
-        if (err) throw err;
-        res.status(201).json({
-          user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-          },
-          token,
-        });
-      }
-    );
+      token,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error");
@@ -59,30 +45,16 @@ router.post("/login", async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
 
-    const payload = {
+    const token = createToken(user);
+    res.status(200).json({
       user: {
-        id: user.id,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
         role: user.role,
       },
-    };
-
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: "40h" },
-      (err, token) => {
-        if (err) throw err;
-        res.status(200).json({
-          user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-          },
-          token,
-        });
-      }
-    );
+      token,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error");

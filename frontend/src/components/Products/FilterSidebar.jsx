@@ -79,6 +79,7 @@ const FilterSidebar = () => {
     }
     setFilters(newFilters);
     updateUrlParams(newFilters);
+    console.log("Filters : ", filters);
   };
 
   const updateUrlParams = (newFilters) => {
@@ -91,6 +92,7 @@ const FilterSidebar = () => {
       }
     });
     setSearchParams(params);
+    console.log("searchParams : ", params);
     navigate(`?${params.toString()}`);
   };
 

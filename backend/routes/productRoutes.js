@@ -118,7 +118,7 @@ router.get("/", async (req, res) => {
       query.collections = collection;
     }
 
-    if (category && category.toLocaleLowerCase() !== "all") {
+    if (category) {
       query.category = category;
     }
 
